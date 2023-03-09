@@ -24,11 +24,7 @@ export default function ColorMenu() {
             dispatch(changeColorTest({ name: activeType, color: cl }));
           }}
         />
-        {/* <FavoriteColor
-          changeColorTest={changeColorTest}
-          favoriteColor={favoriteColor}
-          setFavoriteColor={setFavoriteColor}
-        /> */}
+        <FavoriteColor />
       </div>
       <div className="flex justify-center mt-2 gap-2 select-none">
         <button
