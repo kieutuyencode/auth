@@ -1,13 +1,9 @@
 import { MdOutlineClose } from "react-icons/md";
 
-export default function FavoriteColor({
-  changeColorTest,
-  favoriteColor,
-  setFavoriteColor,
-}) {
+export default function FavoriteColor() {
   return (
     <div className="shadow-lg border rounded-lg p-4 flex gap-2 items-center overflow-x-auto bg-white">
-      {favoriteColor.length > 0 ? (
+      {/* {favoriteColor.length > 0 ? (
         favoriteColor.map((item, i) => {
           return (
             <div
@@ -34,7 +30,8 @@ export default function FavoriteColor({
         })
       ) : (
         <h1 className="text-xl mx-auto font-semibold">Chưa có màu ưa thích!</h1>
-      )}
+      )} */}
+      <h1 className="text-xl mx-auto font-semibold">Chưa có màu ưa thích!</h1>
     </div>
   );
 }
