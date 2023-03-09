@@ -2,9 +2,10 @@ import { GrMenu, GrClose } from "react-icons/gr";
 import Link from "next/link";
 import { useState } from "react";
 import User from "./User";
+import { useSession } from "next-auth/react";
 export default function Header() {
   const [active, setActive] = useState(false);
-  const [login, setLogin] = useState(true);
+  const { data: session } = useSession();
   return (
     <>
       <nav className="select-none bg-white flex flex-col md:flex-row md:justify-between shadow-lg py-2 absolute z-50 top-0 left-0 right-0 md:px-12">
@@ -48,7 +49,7 @@ export default function Header() {
               Tùy chỉnh giày
             </Link>
           </li>
-          {!login ? (
+          {!session ? (
             <>
               <li className="hover:bg-gray-200">
                 <Link href="/bat-dau" className="py-1 pl-6 block">
@@ -56,7 +57,7 @@ export default function Header() {
                 </Link>
               </li>
               <li className="hover:bg-gray-200">
-                <Link href="/bat-dau" className="py-1 pl-6 block">
+                <Link href="/dang-ky" className="py-1 pl-6 block">
                   Đăng ký
                 </Link>
               </li>
@@ -85,7 +86,7 @@ export default function Header() {
           </li>
         </ul>
         <ul className="hidden md:flex items-center">
-          {login ? (
+          {session ? (
             <User />
           ) : (
             <>
@@ -95,7 +96,7 @@ export default function Header() {
                 </Link>
               </li>
               <li className="">
-                <Link href="/test" className="block px-2">
+                <Link href="/dang-ky" className="block px-2">
                   <span className="bg-cyan-400 text-white rounded py-1 px-2 hover:bg-cyan-500">
                     Đăng ký
                   </span>

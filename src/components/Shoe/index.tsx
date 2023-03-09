@@ -15,11 +15,13 @@ export default function Shoe(props: ShoeProps) {
   return (
     <Canvas camera={{ position: [0, 0, 4], fov: 50 }}>
       <ambientLight intensity={0.7} />
-      <Model
-        edit={props?.edit}
-        colors={props.colors}
-        colorsTest={props.colorsTest}
-      />
+      {props?.edit ? (
+        <ModelShoe colors={props.colors} colorsTest={props.colorsTest} />
+      ) : (
+        <Float speed={4}>
+          <ModelShoe colors={props.colors} colorsTest={props.colorsTest} />
+        </Float>
+      )}
       <Environment preset="city" />
       <ContactShadows
         position={[0, -0.8, 0]}
@@ -30,18 +32,5 @@ export default function Shoe(props: ShoeProps) {
       />
       {props?.edit && <OrbitControls makeDefault />}
     </Canvas>
-  );
-}
-function Model(props: ShoeProps) {
-  return (
-    <>
-      {props?.edit ? (
-        <ModelShoe colors={props.colors} colorsTest={props.colorsTest} />
-      ) : (
-        <Float speed={4}>
-          <ModelShoe colors={props.colors} colorsTest={props.colorsTest} />
-        </Float>
-      )}
-    </>
   );
 }

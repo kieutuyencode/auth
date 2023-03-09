@@ -1,6 +1,6 @@
 import { useGLTF } from "@react-three/drei";
 
-interface Color {
+export interface Color {
   laces: string;
   mesh: string;
   caps: string;

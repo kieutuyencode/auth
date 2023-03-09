@@ -1,41 +1,44 @@
+import { useAppDispatch, useAppSelector } from "@/store";
 import { useState } from "react";
-import Type from "./Type";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { changeActive } from "@/store/activeType";
+import { changeColorTest } from "@/store/color";
+import { Color } from "../Shoe/ModelShoe";
 
-export default function MenuType({ setColor, color, setColorTest, colorTest }) {
-  const [active, setActive] = useState("");
-  const [activeType, setActiveType] = useState(true);
+export default function MenuType() {
+  const [active, setActive] = useState(true);
+  const activeType = useAppSelector(
+    (state) => state.activeType.value
+  ) as keyof Color;
+  const dispatch = useAppDispatch();
   return (
     <div className="absolute flex flex-col select-none top-1/2 -translate-y-1/2 left-0 space-y-2 bg-white shadow-lg border py-2 rounded-tr rounded-br">
       <div
         className="flex justify-end p-2 cursor-pointer text-slate-500 hover:text-black"
-        onClick={() => setActiveType((prev) => !prev)}
+        onClick={() => setActive((prev) => !prev)}
       >
-        {activeType ? <AiOutlineArrowLeft /> : <AiOutlineArrowRight />}
+        {active ? <AiOutlineArrowLeft /> : <AiOutlineArrowRight />}
       </div>
-      <div className={`space-y-2 ${!activeType && "hidden"}`}>
+      <div className={`space-y-2 ${!active && "hidden"}`}>
         {nameColorsShoe.map((item) => (
-          <Type
-            text={item.text}
-            changeColor={(color) => {
-              setColor((prev) => ({ ...prev, [item.name]: color }));
-            }}
-            changeColorTest={(color) => {
-              setColorTest((prev) => ({ ...prev, [item.name]: color }));
-            }}
-            color={color[item.name]}
-            colorTest={colorTest[item.name]}
+          <div
+            className={`m-2 px-2 text-slate-500 hover:text-black hover:border-black hover:border-l-2 cursor-pointer ${
+              activeType === item.name && "border-l-2 border-black text-black"
+            }`}
             key={item.name}
-            name={item.name}
-            currentActive={active}
-            setCurrentActive={setActive}
-          />
+            onClick={(): void => {
+              dispatch(changeColorTest({ name: activeType, color: "" }));
+              dispatch(changeActive(item.name));
+            }}
+          >
+            {item.text}
+          </div>
         ))}
       </div>
     </div>
   );
 }
-const nameColorsShoe = [
+const nameColorsShoe: { name: keyof Color; text: String }[] = [
   {
     name: "laces",
     text: "Dây giày",
