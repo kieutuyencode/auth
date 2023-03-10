@@ -52,7 +52,7 @@ export default function Header() {
           {!session ? (
             <>
               <li className="hover:bg-gray-200">
-                <Link href="/bat-dau" className="py-1 pl-6 block">
+                <Link href="/dang-nhap" className="py-1 pl-6 block">
                   Đăng nhập
                 </Link>
               </li>
@@ -91,13 +91,13 @@ export default function Header() {
           ) : (
             <>
               <li className="hover:underline">
-                <Link href="/bat-dau" className="block px-2">
+                <Link href="/dang-nhap" className="block px-2">
                   Đăng nhập
                 </Link>
               </li>
               <li className="">
                 <Link href="/dang-ky" className="block px-2">
-                  <span className="bg-cyan-400 text-white rounded py-1 px-2 hover:bg-cyan-500">
+                  <span className="bg-cyan-400 text-white rounded py-2 px-4 hover:bg-cyan-500">
                     Đăng ký
                   </span>
                 </Link>
