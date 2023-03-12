@@ -5,13 +5,14 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { getCsrfToken } from "next-auth/react";
+import { getCsrfToken, signIn } from "next-auth/react";
 import { NextPageContext } from "next";
 import Link from "next/link";
 import Socials from "@/components/Socials";
 import { BeatLoader } from "react-spinners";
 import { FaUserAlt, FaUserPlus } from "react-icons/fa";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import Router from "next/router";
 
 const FormSchema = z.object({
   email: z.string().email("Email không hợp lệ."),
@@ -35,21 +36,15 @@ export default function Login({ csrfToken }: { csrfToken: string }) {
   });
 
   const onSubmit: SubmitHandler<FormSchemaType> = async (values) => {
-    // try {
-    //   const { data } = await axios.post("/api/auth/signup", {
-    //     ...values,
-    //   });
-    //   reset();
-    //   toast.success(data.message);
-    // } catch (error: any) {
-    //   toast.error(error.response.data.message);
-    // }
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve("resolved");
-      }, 5000);
+    const res: any = await signIn("credentials", {
+      redirect: false,
+      email: values.email,
+      password: values.password,
     });
-    toast.success("abc");
+    if (res.error) {
+      return toast.error(res.error);
+    }
+    Router.push("/");
   };
   return (
     <div className="h-screen overflow-auto bg-gradient-to-r from-violet-500 to-fuchsia-500 grid place-items-center relative py-10 select-none">
@@ -76,7 +71,12 @@ export default function Login({ csrfToken }: { csrfToken: string }) {
             Đăng ký
           </Link>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          method="post"
+          action="/api/auth/signin/email"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <input type="hidden" name="csrfToken" defaultValue={csrfToken} />
           <div className="space-y-4 mt-8">
             <Input
               icon={<HiOutlineMail />}

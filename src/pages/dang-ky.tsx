@@ -7,11 +7,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { NextPageContext } from "next";
-import { getCsrfToken } from "next-auth/react";
+import { getCsrfToken, signIn } from "next-auth/react";
 import Link from "next/link";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { BeatLoader } from "react-spinners";
 import Socials from "@/components/Socials";
+import axios from "axios";
+import Router from "next/router";
 
 const FormSchema = z
   .object({
@@ -27,7 +29,7 @@ const FormSchema = z
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Mật khẩu nhập lại không khớp",
+    message: "Mật khẩu nhập lại không đúng.",
     path: ["confirmPassword"],
   });
 type FormSchemaType = z.infer<typeof FormSchema>;
@@ -44,21 +46,22 @@ export default function Signup({ csrfToken }: { csrfToken: string }) {
   });
 
   const onSubmit: SubmitHandler<FormSchemaType> = async (values) => {
-    // try {
-    //   const { data } = await axios.post("/api/auth/signup", {
-    //     ...values,
-    //   });
-    //   reset();
-    //   toast.success(data.message);
-    // } catch (error: any) {
-    //   toast.error(error.response.data.message);
-    // }
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve("resolved");
-      }, 5000);
-    });
-    toast.success("abc");
+    try {
+      const { data } = await axios.post("/api/auth/signup", {
+        ...values,
+      });
+      const res: any = await signIn("credentials", {
+        redirect: false,
+        email: values.email,
+        password: values.password,
+      });
+      if (res.error) {
+        return toast.error(res.error);
+      }
+      Router.push("/");
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    }
   };
   return (
     <div className="h-screen overflow-auto bg-gradient-to-r from-violet-500 to-fuchsia-500 grid place-items-center relative py-10 select-none">

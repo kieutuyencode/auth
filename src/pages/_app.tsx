@@ -19,7 +19,7 @@ export default function App({
       <PersistGate loading={null} persistor={persistor}>
         <SessionProvider session={session}>
           <ToastContainer
-            position="top-left"
+            position="top-center"
             autoClose={5000}
             hideProgressBar={false}
             newestOnTop={false}
