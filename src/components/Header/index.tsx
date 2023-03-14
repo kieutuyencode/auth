@@ -97,7 +97,7 @@ export default function Header() {
               </li>
               <li className="">
                 <Link href="/dang-ky" className="block px-2">
-                  <span className="bg-cyan-400 text-white rounded py-2 px-4 hover:bg-cyan-500">
+                  <span className="bg-violet-600 text-white rounded py-2 px-4 hover:bg-violet-500">
                     Đăng ký
                   </span>
                 </Link>

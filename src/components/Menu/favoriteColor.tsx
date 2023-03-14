@@ -4,9 +4,11 @@ import { MdOutlineClose } from "react-icons/md";
 export default function FavoriteColor({
   favoriteColor,
   handlerTest,
+  deleteColorServer,
 }: {
   favoriteColor: string[];
   handlerTest: (color: string) => void;
+  deleteColorServer: (position: number) => void;
 }) {
   const { data: session } = useSession();
 
@@ -28,7 +30,18 @@ export default function FavoriteColor({
                 className="w-16 h-16 rounded-full"
                 style={{ background: item }}
               >
-                <MdOutlineClose className="absolute top-0 right-0 hover:fill-white hover:bg-red-500 w-5 h-5 bg-gray-200" />
+                <MdOutlineClose
+                  className="absolute top-0 right-0 hover:fill-white hover:bg-red-500 w-5 h-5 bg-gray-200"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    deleteColorServer(i);
+                  }}
+                />
+                <span className="absolute inset-0 flex justify-center items-center text-xs pointer-events-none">
+                  <span className="bg-white p-1 rounded-lg shadow border">
+                    {item}
+                  </span>
+                </span>
               </div>
             </div>
           );

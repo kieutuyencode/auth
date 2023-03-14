@@ -29,10 +29,10 @@ export default function Input({
           {...register(name)}
           type={type === "password" ? (showPassword ? "text" : type) : type}
           placeholder={placehoder}
-          className={`focus:outline-none w-full py-2 px-9 shadow border rounded-xl overflow-hidden focus:border-2 ${
+          className={`focus:outline-none w-full py-2 px-9 shadow border rounded-xl overflow-hidden ${
             error
-              ? "focus:border-red-500 border-red-500"
-              : "focus:border-violet-600"
+              ? "focus:shadow-[0_0_0_2px] focus:shadow-red-500 border-red-500"
+              : "focus:shadow-[0_0_0_2px] focus:shadow-violet-600"
           }`}
           disabled={isSubmitting}
         />

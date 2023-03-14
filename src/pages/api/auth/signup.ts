@@ -42,7 +42,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     const newUser = await User.create({
       name,
       email,
-      password,
+      password: await bcrypt.hash(password, 12),
     });
     res.json({
       message: "Đăng ký thành công.",

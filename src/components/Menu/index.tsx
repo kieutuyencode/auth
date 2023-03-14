@@ -22,8 +22,10 @@ export default function MenuType() {
       <div className={`space-y-2 ${!active && "hidden"}`}>
         {nameColorsShoe.map((item) => (
           <div
-            className={`m-2 px-2 text-slate-500 hover:text-black hover:border-black hover:border-l-2 cursor-pointer ${
-              activeType === item.name && "border-l-2 border-black text-black"
+            className={`m-2 px-2 hover:text-black hover:border-black hover:border-l-2 cursor-pointer ${
+              activeType === item.name
+                ? "border-l-2 border-black text-black"
+                : "text-slate-500"
             }`}
             key={item.name}
             onClick={(): void => {

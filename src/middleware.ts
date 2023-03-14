@@ -8,7 +8,11 @@ export async function middleware(req: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
     secureCookie: process.env.NODE_ENV === "production",
   });
-  if (pathname == "/dang-ky" || pathname == "/dang-nhap") {
+  if (
+    pathname == "/dang-ky" ||
+    pathname == "/dang-nhap" ||
+    pathname == "/quen-mat-khau"
+  ) {
     if (session) return NextResponse.redirect(origin);
   }
 }

@@ -18,15 +18,48 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
         .status(400)
         .json({ message: "Bạn cần đăng nhập để thêm màu ưa thích." });
     }
-    const user = await User.findOneAndUpdate(
+    const user = await User.findOne({ email }).lean();
+    if (user.favoriteColor.includes(color)) {
+      return res
+        .status(400)
+        .json({ message: `Mã màu ${color} đã tồn tại trong danh sách.` });
+    }
+    const userUpdate = await User.findOneAndUpdate(
       { email },
-      { $push: { favoriteColor: color } },
+      { $push: { favoriteColor: { $each: [color], $position: 0 } } },
       { new: true }
     );
 
     res.json({
       message: "Thêm màu ưa thích thành công.",
-      data: user.favoriteColor,
+      data: userUpdate.favoriteColor,
+    });
+  } catch (error) {
+    res.status(500).json({ message: (error as Error).message });
+  }
+});
+
+handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    await connectDb();
+    const { position, email } = req.body as {
+      position: number;
+      email: string;
+    };
+    const user = await User.findOne({ email }).lean();
+    const color = user.favoriteColor.filter(
+      (item: string, i: number) => i !== position
+    );
+
+    const userUpdate = await User.findOneAndUpdate(
+      { email },
+      { favoriteColor: color },
+      { new: true }
+    );
+
+    res.json({
+      message: "Xóa màu ưa thích thành công.",
+      data: userUpdate.favoriteColor,
     });
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });

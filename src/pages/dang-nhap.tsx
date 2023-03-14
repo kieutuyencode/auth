@@ -112,9 +112,12 @@ export default function Login({ csrfToken }: { csrfToken: string }) {
             )}
           </button>
         </form>
-        <p className="text-right mt-4 text-violet-600 text-sm font-bold">
+        <Link
+          href="/quen-mat-khau"
+          className="text-right block mt-4 text-violet-600 text-sm font-bold"
+        >
           Bạn quên mật khẩu ?
-        </p>
+        </Link>
         <Socials csrfToken={csrfToken} />
         <p className="text-slate-500 mt-4 text-center">
           Bạn chưa có tài khoản?

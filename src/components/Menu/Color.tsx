@@ -7,6 +7,9 @@ import { Color } from "../Shoe/ModelShoe";
 import { changeActive } from "@/store/activeType";
 import { useEffect, useState } from "react";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
+import { useSession } from "next-auth/react";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 export default function ColorMenu({
   favoriteColor,
@@ -24,9 +27,47 @@ export default function ColorMenu({
   );
   const dispatch = useAppDispatch();
   const [show, setShow] = useState(true);
+  const { data: session } = useSession();
 
   function handlerTest(cl: string): void {
     dispatch(changeColorTest({ name: activeType, color: cl }));
+  }
+  async function addColorServer() {
+    try {
+      const { data } = (await axios.post("/api/favoriteColor", {
+        color: colorTest || color,
+        email: session?.user?.email,
+      })) as {
+        data: {
+          message: string;
+          data: string[];
+        };
+      };
+      updateFavoriteColor(data.data);
+      toast.success(data.message);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    }
+  }
+
+  async function deleteColorServer(position: number) {
+    try {
+      const { data } = (await axios.delete("/api/favoriteColor", {
+        data: {
+          position,
+          email: session?.user?.email,
+        },
+      })) as {
+        data: {
+          message: string;
+          data: string[];
+        };
+      };
+      updateFavoriteColor(data.data);
+      toast.success(data.message);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    }
   }
 
   useEffect(() => {
@@ -47,6 +88,7 @@ export default function ColorMenu({
           <FavoriteColor
             favoriteColor={favoriteColor}
             handlerTest={handlerTest}
+            deleteColorServer={deleteColorServer}
           />
         </div>
       )}
@@ -60,7 +102,10 @@ export default function ColorMenu({
         >
           OK
         </button>
-        <button className="border border-black bg-white py-1 px-3 font-mono rounded flex items-center">
+        <button
+          onClick={addColorServer}
+          className="border border-black bg-white py-1 px-3 font-mono rounded flex items-center"
+        >
           <span className="hidden md:flex">MÀU ƯU THÍCH</span>
           <BsSuitHeart className="inline md:ml-2" />
         </button>
