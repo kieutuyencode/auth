@@ -11,6 +11,8 @@ import User from "@/models/User";
 const Shoe = lazy(() => import("@/components/Shoe"));
 
 export default function GetStart({ colorDb }: { colorDb: string[] }) {
+  console.log(colorDb);
+
   const color = useAppSelector((state) => state.color.colors);
   const colorTest = useAppSelector((state) => state.color.colorsTest);
   const activeType = useAppSelector((state) => state.activeType.value);
