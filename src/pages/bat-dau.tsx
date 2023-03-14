@@ -52,6 +52,7 @@ export async function getServerSideProps(ctx: NextPageContext) {
   const session = await getSession(ctx);
   await connectDb();
   const user = await User.findOne({ email: session?.user?.email }).lean();
+  console.log(user?.favoriteColor, session?.user?.email);
 
   return {
     props: {
