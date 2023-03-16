@@ -10,10 +10,12 @@ import { ModelShoeProps } from "./ModelShoe";
 
 interface ShoeProps extends ModelShoeProps {
   edit?: boolean;
+  modal?: boolean;
 }
 export default function Shoe(props: ShoeProps) {
   return (
     <Canvas camera={{ position: [0, 0, 4], fov: 50 }}>
+      {props?.modal && <color attach="background" args={[1, 1, 1]} />}
       <ambientLight intensity={0.7} />
       {props?.edit ? (
         <ModelShoe colors={props.colors} colorsTest={props.colorsTest} />

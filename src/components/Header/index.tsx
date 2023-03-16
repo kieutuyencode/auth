@@ -45,8 +45,8 @@ export default function Header() {
             </Link>
           </li>
           <li className="hover:bg-gray-200">
-            <Link href="/tuy-chinh-giay" className="py-1 pl-6 block">
-              Tùy chỉnh giày
+            <Link href="/gio-hang" className="py-1 pl-6 block">
+              Giỏ hàng
             </Link>
           </li>
           {!session ? (
@@ -80,8 +80,8 @@ export default function Header() {
             </Link>
           </li>
           <li className="hover:underline">
-            <Link href="/tuy-chinh-giay" className="block px-2">
-              Tùy chỉnh giày
+            <Link href="/gio-hang" className="block px-2">
+              Giỏ hàng
             </Link>
           </li>
         </ul>

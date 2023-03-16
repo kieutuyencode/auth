@@ -36,13 +36,8 @@ export default function User({ mobile }: { mobile?: boolean }) {
             </Link>
           </li>
           <li className="hover:bg-gray-200">
-            <Link href="/bat-dau" className="py-1 px-4 block">
-              Bắt đầu
-            </Link>
-          </li>
-          <li className="hover:bg-gray-200">
-            <Link href="/tuy-chinh-giay" className="py-1 px-4 block">
-              Tùy chỉnh giày
+            <Link href="/user/doi-mat-khau" className="py-1 px-4 block">
+              Đổi mật khẩu
             </Link>
           </li>
           <li className="hover:bg-gray-200">
