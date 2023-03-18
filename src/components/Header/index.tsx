@@ -7,9 +7,9 @@ export default function Header() {
   const [active, setActive] = useState(false);
   const { data: session } = useSession();
   return (
-    <>
-      <nav className="select-none bg-white flex flex-col md:flex-row md:justify-between shadow-lg py-2 absolute z-50 top-0 left-0 right-0 md:px-12">
-        <div className="flex justify-between items-center px-4">
+    <div className="bg-white z-50 shadow-lg py-2 absolute top-0 left-0 right-0">
+      <nav className="select-none md:flex md:justify-between md:px-12 max-w-5xl mx-auto w-full">
+        <div className="flex justify-between items-center">
           <Link href="/">
             <img
               src="/images/logo.png"
@@ -106,6 +106,6 @@ export default function Header() {
           )}
         </ul>
       </nav>
-    </>
+    </div>
   );
 }
