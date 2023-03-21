@@ -7,7 +7,7 @@ export default function Header() {
   const [active, setActive] = useState(false);
   const { data: session } = useSession();
   return (
-    <div className="bg-white z-50 shadow-lg py-2 absolute top-0 left-0 right-0">
+    <div className="bg-white z-50 shadow-lg py-2 px-4 absolute top-0 left-0 right-0">
       <nav className="select-none md:flex md:justify-between md:px-12 max-w-5xl mx-auto w-full">
         <div className="flex justify-between items-center">
           <Link href="/">
