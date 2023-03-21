@@ -19,7 +19,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
         .json({ message: "Bạn cần đăng nhập để thêm màu ưa thích." });
     }
     const user = await User.findOne({ email }).lean();
-    if (user.favoriteColor.includes(color)) {
+    if (user?.favoriteColor && user?.favoriteColor.includes(color)) {
       return res
         .status(400)
         .json({ message: `Mã màu ${color} đã tồn tại trong danh sách.` });
