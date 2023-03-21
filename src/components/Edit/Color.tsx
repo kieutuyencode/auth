@@ -28,12 +28,14 @@ export default function ColorMenu({
   const dispatch = useAppDispatch();
   const [show, setShow] = useState(true);
   const { data: session } = useSession();
+  const [loading, setLoading] = useState(false);
 
   function handlerTest(cl: string): void {
     dispatch(changeColorTest({ name: activeType, color: cl }));
   }
   async function addColorServer() {
     try {
+      setLoading(true);
       const { data } = (await axios.post("/api/favoriteColor", {
         color: colorTest || color,
         email: session?.user?.email,
@@ -45,8 +47,10 @@ export default function ColorMenu({
       };
       updateFavoriteColor(data.data);
       toast.success(data.message);
+      setLoading(false);
     } catch (error: any) {
       toast.error(error.response.data.message);
+      setLoading(false);
     }
   }
 
@@ -103,6 +107,7 @@ export default function ColorMenu({
           OK
         </button>
         <button
+          disabled={loading}
           onClick={addColorServer}
           className="border border-black bg-white py-1 px-3 font-mono rounded flex items-center"
         >

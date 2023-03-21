@@ -44,6 +44,7 @@ export default function GetStart({ colorDb }: { colorDb: string[] }) {
           />
         ) : (
           <button
+            disabled={loading}
             onClick={async () => {
               try {
                 setLoading(true);
