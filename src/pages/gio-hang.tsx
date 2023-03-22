@@ -36,8 +36,8 @@ export default function CartPage({ data }: { data: CartProp[] }) {
       ) : data.length > 0 ? (
         <>
           {show && <Modal closeModal={closeModal} colorShow={colorShow} />}
-          <div className="mt-40 mb-16 mx-5">
-            <div className="overflow-x-auto w-full">
+          <div className="mt-36 mb-10 mx-5 h-[calc(100vh-9rem-2.5rem)] overflow-auto">
+            <div className="w-full">
               <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden shadow border">
                 <thead className="bg-gray-900">
                   <tr className="text-white text-center">
