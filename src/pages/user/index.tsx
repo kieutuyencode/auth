@@ -81,83 +81,87 @@ export default function UserPage({
   return (
     <>
       <Header />
-      <div className="mt-32 mb-16 container mx-auto grid grid-cols-1 md:grid-cols-3 bg-white rounded-xl border shadow">
-        <div>
-          <div className="p-8">
-            <img
-              src={session?.user?.image as string}
-              className="w-32 h-32 rounded-full mx-auto"
-            />
-            <p className="font-bold mt-2 text-center">{session?.user?.name}</p>
+      <div className="px-4">
+        <div className="mt-32 mb-16 container mx-auto grid grid-cols-1 md:grid-cols-3 bg-white rounded-xl border shadow max-w-3xl w-full">
+          <div>
+            <div className="p-8">
+              <img
+                src={session?.user?.image as string}
+                className="w-32 h-32 rounded-full mx-auto"
+              />
+              <p className="font-bold mt-2 text-center">
+                {session?.user?.name}
+              </p>
+            </div>
+            <UserNavbar />
           </div>
-          <UserNavbar />
-        </div>
-        <div className="col-span-2">
-          <div className="p-6 md:px-12">
-            <h1 className="pt-8 text-3xl font-medium text-center mb-8">
-              Thông tin cá nhân
-            </h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="space-y-3">
-                <UserInput
-                  label="Họ tên"
-                  placehoder="Nhập họ tên"
-                  type="text"
-                  name="name"
-                  value={info.name}
-                  register={register}
-                  error={errors?.name?.message}
-                  isSubmitting={isSubmitting}
-                />
-                <UserInput
-                  label="Số điện thoại"
-                  placehoder="Nhập số điện thoại"
-                  type="text"
-                  value={info.phone}
-                  name="phone"
-                  register={register}
-                  error={errors?.phone?.message}
-                  isSubmitting={isSubmitting}
-                />
-                <UserInput
-                  label="Địa chỉ"
-                  placehoder="Nhập địa chỉ"
-                  type="text"
-                  value={info.address}
-                  name="address"
-                  register={register}
-                  error={errors?.address?.message}
-                  isSubmitting={isSubmitting}
-                />
-              </div>
-              <div className="mt-6 flex items-center gap-4">
-                <button
-                  disabled={!submit || isSubmitting}
-                  type="submit"
-                  className="shadow-lg hover:shadow-violet-400 px-5 py-3 rounded-xl bg-violet-600 text-white font-bold cursor-pointer w-full md:w-fit flex justify-center items-center gap-2 relative disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:shadow-black/0"
-                >
-                  <span className={`${isSubmitting && "invisible"}`}>
-                    Lưu thay đổi
-                  </span>
-                  {isSubmitting && (
-                    <BeatLoader
-                      size={12}
-                      color="#fff"
-                      className="absolute inset-0 flex justify-center items-center"
-                    />
-                  )}
-                </button>
-                {submit && (
+          <div className="col-span-2">
+            <div className="p-6 md:px-12">
+              <h1 className="pt-8 text-3xl font-medium text-center mb-8">
+                Thông tin cá nhân
+              </h1>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="space-y-3">
+                  <UserInput
+                    label="Họ tên"
+                    placehoder="Nhập họ tên"
+                    type="text"
+                    name="name"
+                    value={info.name}
+                    register={register}
+                    error={errors?.name?.message}
+                    isSubmitting={isSubmitting}
+                  />
+                  <UserInput
+                    label="Số điện thoại"
+                    placehoder="Nhập số điện thoại"
+                    type="text"
+                    value={info.phone}
+                    name="phone"
+                    register={register}
+                    error={errors?.phone?.message}
+                    isSubmitting={isSubmitting}
+                  />
+                  <UserInput
+                    label="Địa chỉ"
+                    placehoder="Nhập địa chỉ"
+                    type="text"
+                    value={info.address}
+                    name="address"
+                    register={register}
+                    error={errors?.address?.message}
+                    isSubmitting={isSubmitting}
+                  />
+                </div>
+                <div className="mt-6 flex items-center gap-4">
                   <button
-                    type="button"
-                    className="px-5 py-3 font-medium"
-                    onClick={() => reset()}
+                    disabled={!submit || isSubmitting}
+                    type="submit"
+                    className="shadow-lg hover:shadow-violet-400 px-5 py-3 rounded-xl bg-violet-600 text-white font-bold cursor-pointer w-full md:w-fit flex justify-center items-center gap-2 relative disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:shadow-black/0"
                   >
-                    HỦY
+                    <span className={`${isSubmitting && "invisible"}`}>
+                      Lưu thay đổi
+                    </span>
+                    {isSubmitting && (
+                      <BeatLoader
+                        size={12}
+                        color="#fff"
+                        className="absolute inset-0 flex justify-center items-center"
+                      />
+                    )}
                   </button>
-                )}
-              </div>
-            </form>
+                  {submit && (
+                    <button
+                      type="button"
+                      className="px-5 py-3 font-medium"
+                      onClick={() => reset()}
+                    >
+                      HỦY
+                    </button>
+                  )}
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>

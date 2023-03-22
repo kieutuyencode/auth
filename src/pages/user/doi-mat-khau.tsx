@@ -56,77 +56,81 @@ export default function ChanPassword() {
   return (
     <>
       <Header />
-      <div className="mt-32 mb-16 container mx-auto grid grid-cols-1 md:grid-cols-3 bg-white rounded-xl border shadow">
-        <div>
-          <div className="p-8">
-            <img
-              src={session?.user?.image as string}
-              className="w-32 h-32 rounded-full mx-auto"
-            />
-            <p className="font-bold mt-2 text-center">{session?.user?.name}</p>
+      <div className="px-4">
+        <div className="mt-32 mb-16 container mx-auto grid grid-cols-1 md:grid-cols-3 bg-white rounded-xl border shadow max-w-3xl w-full">
+          <div>
+            <div className="p-8">
+              <img
+                src={session?.user?.image as string}
+                className="w-32 h-32 rounded-full mx-auto"
+              />
+              <p className="font-bold mt-2 text-center">
+                {session?.user?.name}
+              </p>
+            </div>
+            <UserNavbar />
           </div>
-          <UserNavbar />
-        </div>
-        <div className="col-span-2">
-          <div className="p-6 md:px-12">
-            <h1 className="pt-8 text-3xl font-medium text-center mb-8">
-              Đổi mật khẩu
-            </h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="space-y-3">
-                <Input
-                  icon={<FiLock />}
-                  placehoder="Mật khẩu hiện tại"
-                  type="password"
-                  name="passwordCurrent"
-                  register={register}
-                  error={errors?.passwordCurrent?.message}
-                  isSubmitting={isSubmitting}
-                />
-                <Input
-                  icon={<FiLock />}
-                  placehoder="Mật khẩu mới"
-                  type="password"
-                  name="newPassword"
-                  register={register}
-                  error={errors?.newPassword?.message}
-                  isSubmitting={isSubmitting}
-                />
-                <Input
-                  icon={<FiLock />}
-                  placehoder="Nhập lại mật khẩu mới"
-                  type="password"
-                  name="confirmPassword"
-                  register={register}
-                  error={errors?.confirmPassword?.message}
-                  isSubmitting={isSubmitting}
-                />
-              </div>
-              <Link
-                href="/quen-mat-khau"
-                className="text-right block mt-4 text-violet-600 text-sm font-bold"
-              >
-                Bạn quên mật khẩu ?
-              </Link>
-              <div className="mt-6 flex items-center gap-4">
-                <button
-                  disabled={isSubmitting}
-                  type="submit"
-                  className="shadow-lg hover:shadow-violet-400 px-5 py-3 rounded-xl bg-violet-600 text-white font-bold cursor-pointer w-full flex justify-center items-center gap-2 relative disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:shadow-black/0"
+          <div className="col-span-2">
+            <div className="p-6 md:px-12">
+              <h1 className="pt-8 text-3xl font-medium text-center mb-8">
+                Đổi mật khẩu
+              </h1>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="space-y-3">
+                  <Input
+                    icon={<FiLock />}
+                    placehoder="Mật khẩu hiện tại"
+                    type="password"
+                    name="passwordCurrent"
+                    register={register}
+                    error={errors?.passwordCurrent?.message}
+                    isSubmitting={isSubmitting}
+                  />
+                  <Input
+                    icon={<FiLock />}
+                    placehoder="Mật khẩu mới"
+                    type="password"
+                    name="newPassword"
+                    register={register}
+                    error={errors?.newPassword?.message}
+                    isSubmitting={isSubmitting}
+                  />
+                  <Input
+                    icon={<FiLock />}
+                    placehoder="Nhập lại mật khẩu mới"
+                    type="password"
+                    name="confirmPassword"
+                    register={register}
+                    error={errors?.confirmPassword?.message}
+                    isSubmitting={isSubmitting}
+                  />
+                </div>
+                <Link
+                  href="/quen-mat-khau"
+                  className="text-right block mt-4 text-violet-600 text-sm font-bold"
                 >
-                  <span className={`${isSubmitting && "invisible"}`}>
-                    Lưu thay đổi
-                  </span>
-                  {isSubmitting && (
-                    <BeatLoader
-                      size={12}
-                      color="#fff"
-                      className="absolute inset-0 flex justify-center items-center"
-                    />
-                  )}
-                </button>
-              </div>
-            </form>
+                  Bạn quên mật khẩu ?
+                </Link>
+                <div className="mt-6 flex items-center gap-4">
+                  <button
+                    disabled={isSubmitting}
+                    type="submit"
+                    className="shadow-lg hover:shadow-violet-400 px-5 py-3 rounded-xl bg-violet-600 text-white font-bold cursor-pointer w-full flex justify-center items-center gap-2 relative disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:shadow-black/0"
+                  >
+                    <span className={`${isSubmitting && "invisible"}`}>
+                      Lưu thay đổi
+                    </span>
+                    {isSubmitting && (
+                      <BeatLoader
+                        size={12}
+                        color="#fff"
+                        className="absolute inset-0 flex justify-center items-center"
+                      />
+                    )}
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>

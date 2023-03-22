@@ -14,7 +14,7 @@ export default function MenuType() {
   return (
     <div className="absolute flex flex-col select-none top-1/2 -translate-y-1/2 left-0 space-y-2 bg-white shadow border py-2 rounded-tr rounded-br">
       <div
-        className="flex justify-end p-2 cursor-pointer text-slate-500 hover:text-black"
+        className="flex justify-end pl-2 pr-4 cursor-pointer text-slate-500 hover:text-black text-3xl"
         onClick={() => setActive((prev) => !prev)}
       >
         {active ? <AiOutlineArrowLeft /> : <AiOutlineArrowRight />}
