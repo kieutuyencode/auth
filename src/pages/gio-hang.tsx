@@ -12,6 +12,7 @@ import Router from "next/router";
 import Modal from "@/components/Modal";
 import { useState } from "react";
 import { ImEye } from "react-icons/im";
+import BeatLoaderSpinner from "@/components/Loader/BeatLoader";
 
 interface CartProp extends Color {
   _id: string;
@@ -25,10 +26,12 @@ export default function CartPage({ data }: { data: CartProp[] }) {
   function closeModal(): void {
     setShow(false);
   }
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
       <Header />
+      {loading && <BeatLoaderSpinner />}
       {!session ? (
         <h1 className="mt-40 text-center font-medium text-2xl">
           Bạn chưa đăng nhập.
@@ -180,6 +183,7 @@ export default function CartPage({ data }: { data: CartProp[] }) {
                             className="text-4xl cursor-pointer hover:text-red-500"
                             onClick={async () => {
                               try {
+                                setLoading(true);
                                 const { data } = await axios.delete(
                                   "/api/addToCart",
                                   {
@@ -188,9 +192,11 @@ export default function CartPage({ data }: { data: CartProp[] }) {
                                     },
                                   }
                                 );
+                                setLoading(false);
                                 Router.push("/gio-hang");
                               } catch (error: any) {
                                 toast.error(error.response.data.message);
+                                setLoading(false);
                               }
                             }}
                           />
