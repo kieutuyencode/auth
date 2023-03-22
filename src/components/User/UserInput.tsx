@@ -37,7 +37,7 @@ export default function UserInput({
               ? "focus:shadow-[0_0_0_2px] focus:shadow-red-500 border-red-500"
               : "focus:shadow-[0_0_0_2px] focus:shadow-violet-600"
           }`}
-          disabled={isSubmitting}
+          disabled={isSubmitting || name === "name"}
         />
       </div>
       {error && <span className="text-red-500">{error}</span>}
