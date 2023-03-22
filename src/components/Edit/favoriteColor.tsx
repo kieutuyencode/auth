@@ -1,19 +1,42 @@
 import { useSession } from "next-auth/react";
+import { useEffect, useRef } from "react";
 import { MdOutlineClose } from "react-icons/md";
+import { BeatLoader } from "react-spinners";
 
 export default function FavoriteColor({
+  loading,
   favoriteColor,
   handlerTest,
   deleteColorServer,
 }: {
+  loading: boolean;
   favoriteColor: string[];
   handlerTest: (color: string) => void;
   deleteColorServer: (position: number) => void;
 }) {
   const { data: session } = useSession();
+  const ref = useRef<HTMLDivElement>(null);
+
+  function handleScroll() {
+    if (ref.current) ref.current.scrollLeft = 0;
+  }
+
+  useEffect(() => {
+    handleScroll();
+  }, [loading]);
 
   return (
-    <div className="shadow border rounded-lg p-4 flex gap-2 items-center overflow-x-auto bg-white">
+    <div
+      ref={ref}
+      className={`shadow border rounded-lg p-4 flex gap-2 items-center ${
+        loading ? "overflow-hidden" : "overflow-x-auto"
+      } bg-white relative`}
+    >
+      {loading && (
+        <div className="absolute bg-white/50 flex justify-center items-center inset-0 z-[1]">
+          <BeatLoader color="#000" loading={true} />
+        </div>
+      )}
       {!session ? (
         <h1 className="text-center mx-auto font-semibold">
           Bạn chưa đăng nhập.

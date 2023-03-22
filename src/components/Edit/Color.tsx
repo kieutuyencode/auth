@@ -56,6 +56,7 @@ export default function ColorMenu({
 
   async function deleteColorServer(position: number) {
     try {
+      setLoading(true);
       const { data } = (await axios.delete("/api/favoriteColor", {
         data: {
           position,
@@ -69,8 +70,10 @@ export default function ColorMenu({
       };
       updateFavoriteColor(data.data);
       toast.success(data.message);
+      setLoading(false);
     } catch (error: any) {
       toast.error(error.response.data.message);
+      setLoading(false);
     }
   }
 
@@ -90,6 +93,7 @@ export default function ColorMenu({
             />
           </div>
           <FavoriteColor
+            loading={loading}
             favoriteColor={favoriteColor}
             handlerTest={handlerTest}
             deleteColorServer={deleteColorServer}
