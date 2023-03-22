@@ -28,10 +28,6 @@ export default function UserPage({
 
   const [submit, setSubmit] = useState(false);
   const FormSchema = z.object({
-    name: z
-      .string()
-      .min(2, "Độ dài tên ít nhất 2 ký tự.")
-      .max(32, "Độ dài tên tối đa 32 ký tự."),
     phone: z
       .string()
       .regex(
@@ -68,15 +64,11 @@ export default function UserPage({
   };
 
   useEffect(() => {
-    if (
-      watch().name !== info.name ||
-      watch().phone !== info.phone ||
-      watch().address !== info.address
-    ) {
+    if (watch().phone !== info.phone || watch().address !== info.address) {
       return setSubmit(true);
     }
     setSubmit(false);
-  }, [watch("name"), watch("phone"), watch("address")]);
+  }, [watch("phone"), watch("address")]);
 
   return (
     <>
@@ -102,16 +94,6 @@ export default function UserPage({
               </h1>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="space-y-3">
-                  <UserInput
-                    label="Họ tên"
-                    placehoder="Nhập họ tên"
-                    type="text"
-                    name="name"
-                    value={info.name}
-                    register={register}
-                    error={errors?.name?.message}
-                    isSubmitting={isSubmitting}
-                  />
                   <UserInput
                     label="Số điện thoại"
                     placehoder="Nhập số điện thoại"
