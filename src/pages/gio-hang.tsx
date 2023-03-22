@@ -192,8 +192,8 @@ export default function CartPage({ data }: { data: CartProp[] }) {
                                     },
                                   }
                                 );
-                                setLoading(false);
                                 Router.push("/gio-hang");
+                                setLoading(false);
                               } catch (error: any) {
                                 toast.error(error.response.data.message);
                                 setLoading(false);
